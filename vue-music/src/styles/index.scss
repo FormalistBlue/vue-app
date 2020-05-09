@@ -1,0 +1,43 @@
+
+// 设备屏幕宽度 : 设计稿宽度 =  设备的rem :  设计稿假设的rem(100)
+// 设备的rem = 设计稿假设的rem(100) *  屏幕宽度 /   设计稿宽度
+// 以后在 750的设计稿中 量出多少就 除以 100  
+
+// @import   link   区别 
+// @import是 CSS 提供的语法规则，只有导入样式表的作用；link是HTML提供的标签，不仅可以加载 CSS 文件，还可以定义 RSS、rel 连接属性等。
+// 加载页面时，link标签引入的 CSS 被同时加载；@import引入的 CSS 将在页面加载完毕后被加载
+// @import 有兼容问题 link 没有兼容问题 
+
+
+
+@import "common";
+@import "fonts/iconfont.css";
+
+
+
+html,body,#app,.box{
+    width:100vw;
+    height:100vh;
+    // font-size: calc(100vw/7.5);
+    // font-size: -webkit-calc(100vw/7.5);
+}
+
+.box{
+    padding-bottom:90px;
+}
+
+@keyframes enter{
+    from{opacity: 0;transform: translateY(-10%)}
+    to{opacity: 1;transform: translateY(0%)}
+}
+@keyframes leave{
+    from{opacity: 1;transform: translateY(0%)}
+    to{opacity: 0;transform: translateY(10%)}
+}
+.fade-enter-active, .enter{
+    animation: enter .6s;
+}
+.fade-leave-active , .leave {
+    animation: leave .6s;
+}
+

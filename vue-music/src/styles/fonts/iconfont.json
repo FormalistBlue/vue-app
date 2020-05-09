@@ -1,0 +1,51 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "6844394",
+      "name": "搜索",
+      "font_class": "sousuo",
+      "unicode": "e61a",
+      "unicode_decimal": 58906
+    },
+    {
+      "icon_id": "9097245",
+      "name": "我的",
+      "font_class": "wode",
+      "unicode": "e620",
+      "unicode_decimal": 58912
+    },
+    {
+      "icon_id": "12856707",
+      "name": "歌单",
+      "font_class": "gedan",
+      "unicode": "e516",
+      "unicode_decimal": 58646
+    },
+    {
+      "icon_id": "12945016",
+      "name": "歌曲",
+      "font_class": "gequ",
+      "unicode": "e6ac",
+      "unicode_decimal": 59052
+    },
+    {
+      "icon_id": "13284662",
+      "name": "推荐",
+      "font_class": "tuijian",
+      "unicode": "e650",
+      "unicode_decimal": 58960
+    },
+    {
+      "icon_id": "13608538",
+      "name": "音乐",
+      "font_class": "yinle",
+      "unicode": "e618",
+      "unicode_decimal": 58904
+    }
+  ]
+}
