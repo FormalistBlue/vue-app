@@ -1,0 +1,102 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+
+//  express 启动文件 
+
+var app = require('../app');   // app  包含 express 所有的 api 方法 
+var debug = require('debug')('exp-demo:server');
+var http = require('http');   // node 的 http模块 
+
+/**
+ * Get port from environment and store in Express.
+ */
+// process.env.PORT   
+// process 进程   ()
+// env   环境变量   (dev开发环境  prod 生产)
+// PORT  端口   
+var port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);   // 给 app 设置 全局变量  app.port = port;
+
+
+/**
+ * Create HTTP server.
+ */
+
+// app 混入 服务器 必备  req 和 res 
+var server = http.createServer(app);  // http.createServer(()=>{})
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+server.listen(port);
+server.on('error', onError);  // 监听启动服务器异常  
+server.on('listening', onListening);  // 监听 服务器 是否 启动 监听 
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+//  把端口 强制改成 整数 
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+// bug 异常 
+// 监听 端口是否被占用  
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+// 监听服务器url address 异常 
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+}

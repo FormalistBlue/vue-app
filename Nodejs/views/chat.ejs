@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>逆战聊天室</title>
+    <style>
+        #chatroom{
+            width:360px;
+            height:490px;
+            border:2px solid darkorchid;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            overflow: auto;
+        }
+    </style>
+    <%- include common %>
+</head>
+<body>
+    <%- include("head",{title:"chat"}) %>
+    <div>
+        <h2>NZ1903-聊天室</h2>
+        <div id="chatroom">
+            <!-- 接收聊天内容  -->
+        </div>
+        <div>
+            <input type="text" placeholder="请输入聊天内容" id="word">
+            <input type="button" value="发送内容" id="sendbtn">
+        </div>
+    </div>
+    <%- include foot %>
+
+    <script>
+        // 客户端的 代码 
+        // ## 客户端 socket 功能 
+        // 1. 创建 客户端 socket 
+        const ws = new WebSocket("ws://localhost:3900"); // WebScoket html5 新特性 
+        // 2. 链接服务器 的 socket
+        ws.onopen = function(){  
+            // 输入昵称 
+            ws.send("大家好,我是渣渣潘...");  // 发送一句话到 服务器 
+        }
+        // 3. 发送消息 给 服务器 
+        function sendMsg(){
+            console.log(word.value)
+            ws.send(word.value);   // id  的唯一性 
+            word.value = "";
+        }
+        sendbtn.onclick = sendMsg  // ()  直接执行   不加就是赋值  
+        // 绑定键盘事件
+        document.onkeydown = function(e){
+            if(e.keyCode==13){  // enter 回车 
+                sendMsg() 
+            }
+        }        
+        // 4. 接收服务器发来的消息  
+        ws.onmessage = function(data){
+            console.log(data);
+            document.getElementById("chatroom").innerHTML += `<p>${data.data}</p>`
+        }
+        // 5. 监听 服务器 关闭 或者 异常 
+        ws.onclose = function(){
+            console.log("服务器已经关闭")
+        }
+        ws.onerror = function(err){
+            console.log("服务器出现异常 " + err)
+        }
+            </script>
+</body>
+</html>
